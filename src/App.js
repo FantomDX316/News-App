@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Navbar from './Component/Navbar'
+import News from './Component/News'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      progress:0
+    }
+    this.setProgress = this.setProgress.bind(this)
+  }
+  setProgress(progress){
+    this.setState({
+      progress:progress
+    })
+  }
+  render() {
+    return (
+      <div>
+        <LoadingBar
+          color='#f11946'
+          progress={this.state.progress}
+        />
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<News setProgress={this.setProgress} docTitle="General - Saiyan News" key="general" pageSize={9} category="general" />} />
+            <Route exact path="Business" element={<News setProgress={this.setProgress} docTitle="Business - Saiyan News" key="business" pageSize={9} category="business" />} />
+            <Route exact path="/Entertainment" element={<News setProgress={this.setProgress} docTitle="Entertainment - Saiyan News" key="entertainment" pageSize={9} category="entertainment" />} />
+            <Route exact path="/Health" element={<News setProgress={this.setProgress} docTitle="Health - Saiyan News" key="health" pageSize={9} category="health" />} />
+            <Route exact path="/Science" element={<News setProgress={this.setProgress} docTitle="Science - Saiyan News" key="science" pageSize={9} category="science" />} />
+          </Routes>
+        </BrowserRouter>
+        
+      </div>
+    )
+  }
 }
 
-export default App;
