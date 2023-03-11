@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 
 export default class News extends Component {
-    apiKey ="faaac73b30554b5e8594a031c9dbe76c"
+    apiKey = //API_KEY
 
     static defaultProps = {
         country: "us",
